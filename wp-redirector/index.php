@@ -1,4 +1,14 @@
 <?php
+/*
+Plugin Name: WP Redirector
+Plugin URI: https://github.com/dsktschy/wp-redirector
+Description: WP Redirector redirects all requests to template pages to the specified URL.
+Version: 1.0.0
+Author: dsktschy
+Author URI: https://github.com/dsktschy
+License: GPL2
+*/
+
 // Add fields to the setting page
 add_filter('admin_init', function() {
   add_settings_field(
