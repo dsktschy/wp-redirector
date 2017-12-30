@@ -27,6 +27,7 @@ add_action('template_redirect', function() {
 class WpRedirector {
   static public $fieldId = 'redirect_url';
   static public $fieldPage = 'general';
+  // Outputs an input element with initial value
   static public function echoField(array $args)
   {
     $id = $args['id'];
