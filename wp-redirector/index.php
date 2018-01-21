@@ -28,7 +28,11 @@ add_filter('admin_init', function() {
 add_action('template_redirect', function() {
   $option = get_option(WpRedirector::$fieldId);
   if ($option === '') return;
-  $url = explode(',', str_replace(' ', '', $option))[0];
+  $url = array_map(
+    ['WpRedirector', 'encodeSpace'],
+    array_map('trim', explode(',', $option))
+  )[0];
+  if ($url === '') return;
   header('Location: ' . esc_url($url), true, 301);
   exit;
 });
@@ -43,5 +47,10 @@ class WpRedirector {
     $id = $args['id'];
     $value = esc_html(get_option($id));
     echo "<input name=\"$id\" id=\"$id\" type=\"text\" value=\"$value\" class=\"regular-text code\">";
+  }
+  // Encode spaces
+  static public function encodeSpace($url)
+  {
+    return str_replace(' ', '%20', $url);
   }
 }
